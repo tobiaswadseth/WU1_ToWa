@@ -1,5 +1,5 @@
 # Portfolio
-**_Tobias Wadseth_**
+## **_Tobias Wadseth_**
 
 ## Bakgrund
 Detta projekt gjors i samband med Webbutveckling 1 på Thorén Innovation School som slutprojekt.
@@ -10,7 +10,9 @@ Detta projekt gjors i samband med Webbutveckling 1 på Thorén Innovation School
 Projektet skall innehålla tidigare verk som kan användas till exempel till ett CV för att visa tidigare verk.
 
 ### Layout
-Sidan är tänkt att vara upplagd i ett gridformat med "thumbnails" som visar lite vad det är för projekt. Detta syns i mockup bilderna. Sidan skall också ha tre ordinare sidor: Hem, Om och Kontakt. Sedan läggs portfolio till för vardera projekt.
+Sidan är tänkt att vara upplagd i ett gridformat med "thumbnails" som visar lite vad det är för projekt. Detta syns i [mockup] bilderna. Sidan skall också ha tre ordinare sidor: Hem, Om och Kontakt. Sedan läggs portfolio till för vardera projekt.
+
+[mockup]: https://github.com/wadsethtobias/WU1_ToWa#Mockup
 
 ### Färgval
 #### Hover - ROSA
