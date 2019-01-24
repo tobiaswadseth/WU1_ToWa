@@ -18,7 +18,10 @@ Sidan är tänkt att vara upplagd i ett gridformat med "thumbnails" som visar li
 #### Hover - ROSA
 ##### HEX - #FF8CAA - ![alt-text](https://via.placeholder.com/15/FF8CAA/FF8CAA?Text=%20 "#FF8CAA")
 
-#### Text - GRÅ
+#### Subtext - MÖRK
+##### HEX - #111111 - ![alt-text](https://via.placeholder.com/15/111111/111111?Text=%20 "#111111")
+
+#### Subtext - GRÅ
 ##### HEX - #888888 - ![alt-text](https://via.placeholder.com/15/888888/888888?Text=%20 "#888888")
 
 #### Highlight - MÖRK
