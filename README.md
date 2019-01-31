@@ -27,16 +27,24 @@ Sidan är tänkt att vara upplagd i ett gridformat med "thumbnails" som visar li
 #### Highlight - MÖRK
 ##### HEX - #343A40 - ![alt-text](https://via.placeholder.com/15/343A40/343A40?Text=%20 "#343A40")
 
+#### Border i kontaktformulär - GRÅ
+##### HEX - #EEEEEE - ![alt-text](https://via.placeholder.com/15/EEEEEE/EEEEEE?Text=%20 "#EEEEEE")
+
 #### Error i kontaktformulär - RÖD
 ##### HEX - #DC3545 - ![alt-text](https://via.placeholder.com/15/DC3545/DC3545?Text=%20 "#DC3545")
 
-#### Succe i kontaktformulär - GRÖN
+#### Success i kontaktformulär - GRÖN
 ##### HEX - #28A745 - ![alt-text](https://via.placeholder.com/15/28A745/28A745?Text=%20 "#28A745")
 
 ### Typsnitt
 #### [ROBOTO](https://fonts.google.com/specimen/Roboto)
 
 #### [MONTSERRAT](https://fonts.google.com/specimen/Montserrat)
+
+#### Ikoner
+##### [IONICONS](https://ionicons.com)
+
+##### [FONT AWESOME](https://fontawesome.com)
 
 ### Mockup
 #### [MOCKUP](https://github.com/wadsethtobias/WU1_ToWa/tree/master/mockup)
