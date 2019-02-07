@@ -9,7 +9,7 @@ $(function() {
 
         // Kolla om validator.js stoppar formuläret från att skickas
         if (!e.isDefaultPrevented()) {
-            var url = "form/contact.php";
+            var url = "assets/form/contact.php";
 
             // Skicka formuläret i POST med ajax
             $.ajax({
