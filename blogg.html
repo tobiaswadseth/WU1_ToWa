@@ -17,15 +17,14 @@
     <link rel="stylesheet" href="assets/css/style.min.css" type="text/css" media="all">
 
     <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 </head>
 
 <body>
-
-    <!-- Custom cursor -->
+    <!-- Custom Cursor -->
     <div id="cursor"></div>
 
     <!-- Preloader -->
@@ -72,7 +71,7 @@
         <!-- Copyright -->
         <footer class="text-center mt-auto">
             <div class="container">
-                <span class="copyright">© <span id="overlay-year"></span> Tobias Wadseth</span>
+                <span class="copyright">&copy; <span id="overlay-year"></span> Tobias Wadseth</span>
             </div>
         </footer>
 
@@ -81,66 +80,78 @@
     <!-- Sid wrapper -->
     <div class="site-wrapper">
 
-        <!-- Sid header -->
-        <header>
-            <nav class="navbar navbar-light">
-                <div class="container d-flex">
-                    <!-- Meny ikon -->
-                    <div class="menu-icon justify-content-end">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+    <!-- Sid header -->
+    <header>
+        <nav class="navbar navbar-light">
+            <div class="container d-flex">
 
-                </div>
-            </nav>
-        </header>
-
-        <!-- Innehåll -->
-        <section class="content">
-            <div class="container container-padding">
-
-                <div class="page-header text-center">
-                    <h1>Tobias Wadseth</h1>
-                    <p>Webbutveckling 1 Portfolio</p>
+                <!-- Meny ikon -->
+                <div class="menu-icon justify-content-end">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
 
             </div>
+        </nav>
+    </header>
 
-            <div class="parallax-bg" data-image-src="resources/images/headshot.png" data-stellar-background-ratio="0.5"></div>
+    <!-- Blogg -->
+    <section class="blog-content">
 
-            <div class="container container-padding">
-                <h2 class="mt-10 mb-4">Om Mig</h2>
-                <p>Jag är 18 år, bosatt i göteborg och går i tvåan på Thorén Innovation School. Jag har alltid varit intresserad utav webben och vad den består av. Jag började kolla på hur olika hemsidor är uppbyggda genom att kolla i developer tools (inspektera element). Sedan började jag smått skriva egen kod i HTML och insåg snart att man kunde ändra utseendet med CSS. Snart därefter såg jag att Javascript kunde integreras med HTML och även CSS. Jag håller tillmestadels på med Front-End men är även lite intresserad av hur inloggningssystem och kontaktformulär fungerar så jag har börjat läsa på om PHP.</p>
+        <div class="container container-padding">
 
-                <h3 class="mt-10 mb-4">Mina Färdigheter</h3>
-                <ul>
-                    <li>3+ år av Webbutveckling</li>
-                    <li>5+ år av Java</li>
-                    <li>4+ år av Javascript</li>
-                    <li>2+ år av JQuery</li>
-                    <li>1+ år av PHP</li>
+            <!-- Blogg artikel -->
+            <article class="blog-item">
+                <!-- Header -->
+                <header>
+                    <!-- Titel -->
+                    <h2 class="title"><a href="blog/internetshistoria.html">Internets Historia</a></h2>
+                    <!-- Meta -->
+                    <ul class="meta list-inline">
+                        <li class="list-inline-item">6 Februari 2019</li>
+                        <li class="list-inline-item">Tobias</li>
+                        <li class="list-inline-item">Internets Historia</li>
+                    </ul>
+                </header>
+                <!-- Bild -->
+                <img src="resources/images/blogg/internetshistoria/cover.jpg" alt="Blogg">
+                <!-- Footer -->
+                <footer>
+                    <!-- Utdrag -->
+                    <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex repellendus, corporis aliquid quaerat, vel quibusdam iste at totam reprehenderit fuga amet nisi eum, tempore officia consequuntur doloremque similique, aperiam adipisci.</p>
+                    <!-- Läs Mer knapp -->
+                    <a href="blog/internetshistoria.html" class="btn btn-default">Läs Mer</a>
+                </footer>
+            </article>
+
+            <nav class="pagination-outer">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
                 </ul>
-            </div>
+            </nav>
 
-        </section>
+        </div>
 
-        <!-- Email -->
-        <section class="cta text-center">
-            <div class="container">
-                <span>Kontakta Mig</span>
-                <h2><a href="contact">tobias@wadseth.com</a></h2>
-            </div>
-        </section>
+    </section>
 
-        <!-- Sid footer -->
-        <footer class="text-center">
-            <div class="container">
-                <!-- Copyright -->
-                <span class="copyright">© <span id="year"></span> Tobias Wadseth</span>
-            </div>
-        </footer>
+    <!-- Email -->
+    <section class="cta text-center">
+        <div class="container">
+            <span>Kontakta Mig</span>
+            <h2><a href="kontakt.html">tobias@wadseth.com</a></h2>
+        </div>
+    </section>
 
+    <!-- Sid footer -->
+    <footer class="text-center">
+        <div class="container">
+            <!-- Copyright -->
+            <span class="copyright">&copy; <span id="year"></span> Tobias Wadseth</span>
+        </div>
+    </footer>
+
+    </div>
 
     <!-- Go to top -->
     <a href="javascript:" id="return-to-top"><i class="ion-md-arrow-up"></i></a>
@@ -156,5 +167,4 @@
     <script src="assets/js/custom.js"></script>
 
 </body>
-
 </html>

@@ -31,6 +31,17 @@
 				a {
 					font-size: 20px;
 				}
+				.switch {
+					font-size: 20px;
+					top: 10px;
+				}
+			}
+			.submenu {
+				li {
+					a {
+						font-size: 14px;
+					}
+				}
 			}
 		}
 	}
@@ -76,13 +87,6 @@
 	article.blog-item footer, article.blog-item header, article.blog-item.is-single .content {
 	    padding-left: 0;
 	    padding-right: 0;
-	}
-	.comments .single-comment .thumb {
-	    height: 50px;
-	    width: 50px;
-	}
-	.comments .single-comment .comment {
-	    margin-left: 70px;
 	}
 	.portfolio-single .navigation a {
 	    font-size: 16px;

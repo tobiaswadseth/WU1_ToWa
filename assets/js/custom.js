@@ -36,7 +36,7 @@ $(window).on('load', function() {
                 selector: '.load-more',
             },
         },
-        // trigger Masonry som en callback
+        // Masonry
         function(newElements) {
 
             var $newElems = $(newElements);
@@ -102,6 +102,17 @@ $(function() {
     $.stellar({
         horizontalScrolling: false,
         verticalOffset: 40
+    });
+
+    /*=========================================================================
+        Undermeny knapp
+     =========================================================================*/
+    $( ".submenu" ).before( '<i class="ion-md-add switch"></i>' );
+
+    $(".vertical-menu li i.switch").on( 'click', function() {
+        var $submenu = $(this).next(".submenu");
+        $submenu.slideToggle(300);
+        $submenu.parent().toggleClass("openmenu");
     });
 
     /*=========================================================================
