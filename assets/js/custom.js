@@ -1,6 +1,9 @@
 $(window).on('load', function() {
     "use strict";
 
+    // Göm vertikal menyn
+    $('#vertical-menu').addClass("invisible");
+
     // Sätt copyright årtal
     var date = new Date();
     $('#overlay-year').text(date.getFullYear());
@@ -69,6 +72,9 @@ $(window).on('load', function() {
     =========================================================================*/
     $("#preloader").delay(350).addClass('loaded');
     $('.site-wrapper').addClass('loaded');
+
+    // Tar bort invisible classen från vertikal menyn
+    $('.vertical-menu').removeClass('invisible');
 
 });
 
