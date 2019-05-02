@@ -61,3 +61,7 @@ För ett felmeddelande från validatorn för kontaktformulär kommer ett meddela
 
 ### Tillgänglighet
 För att göra portfoliot tillgängligt oberoende av webbläsare och version av webbläsare används de olika "kit" som finns. Eftersom alla webbläsare inte stödjer alla olika css selektorer och har därav en typ av sin egna css selektorer kommer dessa olika för de största och mest använda webbläsare och deras olika versioner att användas. Media queries kommer också att användas för att kunna skala ner eller upp vissa element vid föränding av fönster storlek på webbläsaren.
+
+## Dokumentation
+
+### COMING SOON
