@@ -64,4 +64,13 @@ För att göra portfoliot tillgängligt oberoende av webbläsare och version av 
 
 ## Dokumentation
 
-### COMING SOON
+### Vad var uppgiften?
+
+
+### Hur genomfördes uppgiften?
+
+
+### Hur blev resultatet?
+
+
+### Vad kunde gjorts bättre?
