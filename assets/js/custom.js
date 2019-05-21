@@ -1,4 +1,4 @@
-$(window).on('load', function() {
+$(window).on('load', function () {
     "use strict";
 
     // Göm vertikal menyn
@@ -11,7 +11,7 @@ $(window).on('load', function() {
 
     // Masonry
     var $container = $('.masonry');
-    $container.imagesLoaded(function() {
+    $container.imagesLoaded(function () {
         $container.masonry({
             itemSelector: '.grid-item',
         });
@@ -40,10 +40,10 @@ $(window).on('load', function() {
             },
         },
         // Masonry
-        function(newElements) {
+        function (newElements) {
 
             var $newElems = $(newElements);
-            $newElems.imagesLoaded(function() {
+            $newElems.imagesLoaded(function () {
                 // Fäst masonry
                 $newElems.animate({
                     opacity: 1
@@ -61,7 +61,7 @@ $(window).on('load', function() {
 
     $container.infinitescroll('unbind');
 
-    $('.load-more button').on('click', function() {
+    $('.load-more button').on('click', function () {
         $container.infinitescroll('retrieve');
         $('.load-more').find('button').css('visibility', 'hidden');
         return false;
@@ -78,17 +78,17 @@ $(window).on('load', function() {
 
 });
 
-$(function() {
+$(function () {
     "use strict";
 
     /*=========================================================================
         Overlay meny klick
     =========================================================================*/
-    $(".menu-icon").on('click', function() {
+    $(".menu-icon").on('click', function () {
         $(".overlay-menu").addClass('opened');
     });
 
-    $(".overlay-menu .close-icon").on('click', function() {
+    $(".overlay-menu .close-icon").on('click', function () {
         $(".overlay-menu").removeClass('opened');
     });
 
@@ -113,9 +113,9 @@ $(function() {
     /*=========================================================================
         Undermeny knapp
      =========================================================================*/
-    $( ".submenu" ).before( '<i class="ion-md-add switch"></i>' );
+    $(".submenu").before('<i class="ion-md-add switch"></i>');
 
-    $(".vertical-menu li i.switch").on( 'click', function() {
+    $(".vertical-menu li i.switch").on('click', function () {
         var $submenu = $(this).next(".submenu");
         $submenu.slideToggle(300);
         $submenu.parent().toggleClass("openmenu");
@@ -124,20 +124,20 @@ $(function() {
     /*=========================================================================
             Go to top
     =========================================================================*/
-    $(window).scroll(function() {
+    $(window).scroll(function () {
         if ($(this).scrollTop() >= 250) { // Om 50px eller mer har skrollats
             $('#return-to-top').fadeIn(200); // Fade in go to top pil
         } else {
             $('#return-to-top').fadeOut(200); // Else fade out go to top pil
         }
     });
-    $('#return-to-top').on('click', function() { // When go to top pil blir klickar
+    $('#return-to-top').on('click', function () { // When go to top pil blir klickar
         $('body,html').animate({
             scrollTop: 0 // Skrolla till toppen av sidan
         }, 400);
     });
 
-    $(document).on('mousemove', function(e) {
+    $(document).on('mousemove', function (e) {
         var width = $(document).width();
         var height = $(document).height();
 
