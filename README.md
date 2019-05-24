@@ -65,12 +65,13 @@ För att göra portfoliot tillgängligt oberoende av webbläsare och version av 
 ## Dokumentation
 
 ### Vad var uppgiften?
-
+Uppgiften var att skapa ett personligt portfolio eller en personlig blogg i form av en webbplats. Först skulle en mockup, en digital skiss, göras. Sedan skulle en planering skrivas där all information om vad som skall användas skrivs ner så som funktionalitet, typsnitt, färger och ikonbibliotek.
 
 ### Hur genomfördes uppgiften?
-
+Webbplatsen genomfördes på det sätt att html filerna skapades först där en struktur skapades för alla de delarna som skulle användas. Till exempel hierarki av element samt klasser och id angavs. Sedan skapades scss filerna för att lättare kunna dela in css elementen i specifika grupper som sedan kompileras till en fill som länkas i html dokumenten. Efter detta lades javascript biblioteken som skulle användas till och konfigureras till preferens. Till sist gjordes kontaktformuläret som skrevs i PHP och kopplades till "tobias@wadseth.com" som alla meddelanden från kontaktformuläret skickas till.
 
 ### Hur blev resultatet?
-
+Projektet följde mockupen till största mån och blev som tänkt. Filstrukturen samt kodstrukturen blev bra. Kontaktformuläret fungerar utmärkt utan några sedda buggar. Likaså tar validatorn bort anglebrackets "<" & ">" för att utesluta XSS (Cross-Site Scripting).
 
 ### Vad kunde gjorts bättre?
+Något som kunde gjorts bättre är tidsuppdelning. Det vill säga att inte ha stressat så mycket med att få koden skriven så snabbt som möjligt. Även responsiviteten för mindre skärmar kunde gjorts på ett bättre sätt för åtkomlighet av element och länkar.
