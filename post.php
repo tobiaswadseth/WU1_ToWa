@@ -1,3 +1,13 @@
+<?php require('assets/blogg/config.php'); 
+$stmt = $db->prepare('SELECT postID, postTitle, postCont, postDate, postUser FROM posts WHERE postSlug = :postSlug');
+$stmt->execute(array(':postSlug' => $_GET['id']));
+$row = $stmt->fetch();
+// Finns inte ID omdirigera tillbaka till blogg.php.
+if($row['postID'] == ''){
+	header('Location: ./blogg.php');
+	exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="sv">
 
@@ -9,13 +19,13 @@
     <title>Tobias Wadseth</title>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css" media="all">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../assets/css/all.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="assets/css/all.min.css" type="text/css" media="all">
     <!-- IonIcons -->
-    <link rel="stylesheet" href="../assets/css/ionicons.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="assets/css/ionicons.min.css" type="text/css" media="all">
     <!-- Egen -->
-    <link rel="stylesheet" href="../assets/css/style.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="assets/css/style.min.css" type="text/css" media="all">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -53,20 +63,17 @@
 
         <!-- Navigation meny -->
         <ul class="vertical-menu mt-auto">
-            <li><a href="../">Portfolio</a>
+            <li><a href="./">Portfolio</a>
                 <ul class="submenu">
-                    <li><a href="../portfolio/exempel1.html">Exempel 1</a></li>
-                    <li><a href="../portfolio/exempel2.html">Exempel 2</a></li>
-                    <li><a href="../portfolio/exempel3.html">Exempel 3</a></li>
+                    <li><a href="portfolio/exempel1.html">Exempel 1</a></li>
+                    <li><a href="portfolio/exempel2.html">Exempel 2</a></li>
+                    <li><a href="portfolio/exempel3.html">Exempel 3</a></li>
                 </ul>
             </li>
-            <li><a href="../om.html">Om</a></li>
-            <li><a href="../blogg.html">Blogg</a>
-                <ul class="submenu">
-                    <li><a href="../blogg/internetshistoria.html">Internets Historia</a></li>
-                </ul>
-            </li>
-            <li><a href="../kontakt.html">Kontakt</a></li>
+            <li><a href="om.html">Om</a></li>
+            <li><a href="blogg.php">Blogg</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+            <li><a href="admin/login.php">Logga In</a></li>
         </ul>
 
         <!-- Copyright -->
@@ -101,22 +108,43 @@
 
             <div class="container container-padding">
 
+                <?php	
+                    echo '<article class="blog-item is-single">';
+                    
+                        echo '<header>';
+
+                            echo '<h2 class="title">'.$row['postTitle'].'</h1>';
+
+                            echo '<ul class="meta list-inline">';
+
+                                echo '<li class="list-inline-item>'.date('j F Y', strtotime($row['postDate'])).'</li>';
+                                echo '<li class="list-inline-item>'.$row['postUser'].'</li>';
+
+                            echo '</ul>';
+
+                        echo '</header>';
+
+                        echo '<div class="content">'.$row['postCont'].'</div>';	
+
+                    echo '</article>';
+                ?>
+
                 <!-- Blogg artikel -->
-                <article class="blog-item is-single">
+                <!-- <article class="blog-item is-single"> -->
                     <!-- Header -->
-                    <header>
+                    <!-- <header> -->
                         <!-- Titel -->
-                        <h2 class="title">Internets Historia</h2>
+                        <!-- <h2 class="title">Internets Historia</h2> -->
                         <!-- Meta -->
-                        <ul class="meta list-inline">
+                        <!-- <ul class="meta list-inline"> -->
                             <!-- Datum -->
-                            <li class="list-inline-item">6 Februari 2019</li>
+                            <!-- <li class="list-inline-item">6 Februari 2019</li> -->
                             <!-- Användare -->
-                            <li class="list-inline-item">Tobias</li>
-                        </ul>
-                    </header>
+                            <!-- <li class="list-inline-item">Tobias</li> -->
+                        <!-- </ul> -->
+                    <!-- </header> -->
                     <!-- Bild -->
-                    <img src="../resources/images/blogg/internetshistoria/blog-1.jpg" alt="Blogg">
+                    <!-- <img src="../resources/images/blogg/internetshistoria/blog-1.jpg" alt="Blogg">
                     <div class="content">
                         <p>Webbutveckling har som tjänst utvecklats enormt de senaste åren. Vilket har skapat en mängd nya jobb och möjligheter. Eftersom fler och fler företag och individer väljer att lägga mer och mer tid på internet. Företag väljer att använda sig av internet för att presentera portfolio eller tjänster även produkter. I form av webbsidor. Som till exempel denna hemsida.</p>
                         <h5>Webbutveckling</h5>
@@ -135,7 +163,7 @@
                         <p>Faraon, M. (2017). Webbutveckling med PHP och MySQL. 2nd ed. Lund: Studentlitteratur.</p>
                         <p>Jag valde denna bok därför att den är väldigt ny det vill säga att den innehåller relevant information om ämnet samt författaren (Montathar Faraon) är en trovärdig person. Faraon är lärare på Högskolan Kristianstad, HKR. Därför känner jag att det är en trovärdig källa av relevant information.</p>
                     </div>
-                </article>
+                </article> -->
 
             </div>
 
@@ -162,14 +190,14 @@
     <a href="javascript:" id="return-to-top"><i class="ion-md-arrow-up"></i></a>
 
     <!-- Scripts -->
-    <script src="../assets/js/jquery-1.12.3.min.js"></script>
-    <script src="../assets/js/popper.min.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/masonry.pkgd.min.js"></script>
-    <script src="../assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="../assets/js/jquery.stellar.js"></script>
-    <script src="../assets/js/infinite-scroll.min.js"></script>
-    <script src="../assets/js/custom.js"></script>
+    <script src="assets/js/jquery-1.12.3.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/masonry.pkgd.min.js"></script>
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/js/jquery.stellar.js"></script>
+    <script src="assets/js/infinite-scroll.min.js"></script>
+    <script src="assets/js/custom.js"></script>
 
 </body>
 </html>

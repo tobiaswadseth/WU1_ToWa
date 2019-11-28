@@ -1,3 +1,6 @@
+<?php
+require('assets/blogg/config.php');
+?>
 <!DOCTYPE html>
 <html lang="sv">
 
@@ -61,12 +64,9 @@
                 </ul>
             </li>
             <li><a href="om.html">Om</a></li>
-            <li><a href="blogg.html">Blogg</a>
-                <ul class="submenu">
-                    <li><a href="blogg/internetshistoria.html">Internets Historia</a></li>
-                </ul>
-            </li>
+            <li><a href="blogg.php">Blogg</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
+            <li><a href="admin/login.php">Logga In</a></li>
         </ul>
 
         <!-- Copyright -->
@@ -102,29 +102,67 @@
 
         <div class="container container-padding">
 
+			<?php
+				try {
+					$pages = new Paginator('1','p');
+					$stmt = $db->query('SELECT postID FROM posts');
+					// Skicka vidare posts till Paginator
+					$pages->set_total($stmt->rowCount());
+					$stmt = $db->query('SELECT postID, postTitle, postSlug, postDesc, postDate, postUser FROM posts ORDER BY postID DESC '.$pages->get_limit());
+					while($row = $stmt->fetch()){
+                        echo '<article class="blog-item">';
+
+                            echo '<header>';
+
+                            echo '<h2 class="titel"><a href="'.$row['postSlug'].'">'.$row['postTitle'].'</a></h2>';
+
+                            echo '<ul class="meta list-inline">';
+
+                                echo '<li class="list-inline-item>'.date('j F Y', strtotime($row['postDate'])).'</li>';
+                                echo '<li class="list-inline-item>'.$row['postUser'].'</li>';
+
+                            echo '</ul>';
+
+                            echo '</header>';
+
+                            echo '<footer>';
+
+                                echo '<p class="excerpt">'.$row['postDesc'].'</p>';
+
+                                echo '<a href="'.$row['postSlug'].'" class="btn btn-default">Läs Mer</a>';
+
+                            echo '</footer>';
+
+                        echo '</article>';
+					}
+					echo $pages->page_links();
+				} catch(PDOException $e) {
+				    echo $e->getMessage();
+				}
+			?>
+
             <!-- Blogg artikel -->
-            <article class="blog-item">
+            <!-- <article class="blog-item"> -->
                 <!-- Header -->
-                <header>
+                <!-- <header> -->
                     <!-- Titel -->
-                    <h2 class="title"><a href="blogg/internetshistoria.html">Internets Historia</a></h2>
+                    <!-- <h2 class="title"><a href="blogg/internetshistoria.html">Internets Historia</a></h2> -->
                     <!-- Meta -->
-                    <ul class="meta list-inline">
-                        <li class="list-inline-item">6 Februari 2019</li>
-                        <li class="list-inline-item">Tobias</li>
-                        <li class="list-inline-item">Internets Historia</li>
-                    </ul>
-                </header>
+                    <!-- <ul class="meta list-inline"> -->
+                        <!-- <li class="list-inline-item">6 Februari 2019</li> -->
+                        <!-- <li class="list-inline-item">Tobias</li> -->
+                    <!-- </ul> -->
+                <!-- </header> -->
                 <!-- Bild -->
-                <img src="resources/images/blogg/internetshistoria/cover.jpg" alt="Blogg">
+                <!-- <img src="resources/images/blogg/internetshistoria/cover.jpg" alt="Blogg"> -->
                 <!-- Footer -->
-                <footer>
+                <!-- <footer> -->
                     <!-- Utdrag -->
-                    <p class="excerpt">Webbutveckling har som tjänst utvecklats enormt de senaste åren. Vilket har skapat en mängd nya jobb och möjligheter.</p>
+                    <!-- <p class="excerpt">Webbutveckling har som tjänst utvecklats enormt de senaste åren. Vilket har skapat en mängd nya jobb och möjligheter.</p> -->
                     <!-- Läs Mer knapp -->
-                    <a href="blogg/internetshistoria.html" class="btn btn-default">Läs Mer</a>
-                </footer>
-            </article>
+                    <!-- <a href="blogg/internetshistoria.html" class="btn btn-default">Läs Mer</a> -->
+                <!-- </footer> -->
+            <!-- </article> -->
 
             <nav class="pagination-outer">
                 <ul class="pagination justify-content-center">
