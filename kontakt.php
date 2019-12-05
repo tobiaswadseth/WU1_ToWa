@@ -1,3 +1,6 @@
+<?php
+require('assets/blogg/config.php');
+?>
 <!DOCTYPE html>
 <html lang="sv">
 
@@ -64,7 +67,14 @@
             <li><a href="om.html">Om</a></li>
             <li><a href="blogg.php">Blogg</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
-            <li><a href="admin/login.php">Logga In</a></li>
+            <?php
+            if ($user->is_logged_in()) {
+                echo '<li><a href="admin/logout.php">Logga Ut</a></li>';
+                echo '<li><a href="admin/index.php">Kontroll Panel</a></li>';
+            } else {
+                echo '<li><a href="admin/login.php">Logga In</a></li>';
+            }
+            ?>
         </ul>
 
         <!-- Copyright -->
@@ -110,7 +120,7 @@
             <div class="container container-padding">
 
                 <!-- Kontakt formulär -->
-                <form id="contact-form" class="contact-form mt-6" method="post" action="form/contact.php">
+                <form autocomplete="off" id="contact-form" class="contact-form mt-6" method="post" action="assets/form/contact.php">
 
                     <div class="messages"></div>
 
@@ -118,7 +128,7 @@
                         <div class="column col-md-6">
                             <!-- Namn -->
                             <div class="form-group">
-                                <input autocomplete="off" type="text" class="form-control" name="InputName" id="InputName" placeholder="Ditt namn" required="required" data-error="Namn krävs.">
+                                <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Ditt namn" required="required" data-error="Namn krävs.">
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -126,7 +136,7 @@
                         <div class="column col-md-6">
                             <!-- Email -->
                             <div class="form-group">
-                                <input autocomplete="off" type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="Email adress" required="required" data-error="Email krävs.">
+                                <input type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="Email adress" required="required" data-error="Email krävs.">
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -134,7 +144,7 @@
                         <div class="column col-md-12">
                             <!-- Meddelande -->
                             <div class="form-group">
-                                <textarea autocomplete="off" name="InputMessage" id="InputMessage" class="form-control" rows="5" placeholder="Meddelande" required="required" data-error="Meddelande krävs."></textarea>
+                                <textarea name="InputMessage" id="InputMessage" class="form-control" rows="5" placeholder="Meddelande" required="required" data-error="Meddelande krävs."></textarea>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>

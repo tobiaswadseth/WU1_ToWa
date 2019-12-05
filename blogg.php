@@ -66,7 +66,14 @@ require('assets/blogg/config.php');
             <li><a href="om.html">Om</a></li>
             <li><a href="blogg.php">Blogg</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
-            <li><a href="admin/login.php">Logga In</a></li>
+            <?php
+            if ($user->is_logged_in()) {
+                echo '<li><a href="admin/logout.php">Logga Ut</a></li>';
+                echo '<li><a href="admin/index.php">Kontroll Panel</a></li>';
+            } else {
+                echo '<li><a href="admin/login.php">Logga In</a></li>';
+            }
+            ?>
         </ul>
 
         <!-- Copyright -->
@@ -103,72 +110,43 @@ require('assets/blogg/config.php');
         <div class="container container-padding">
 
 			<?php
-				try {
-					$pages = new Paginator('1','p');
-					$stmt = $db->query('SELECT postID FROM posts');
-					// Skicka vidare posts till Paginator
-					$pages->set_total($stmt->rowCount());
-					$stmt = $db->query('SELECT postID, postTitle, postSlug, postDesc, postDate, postUser FROM posts ORDER BY postID DESC '.$pages->get_limit());
-					while($row = $stmt->fetch()){
+                try {
+                    $pages = new Paginator('5', 'p');
+                    $stmt = $db->query('SELECT postID FROM posts');
+                    // Skicka antal posts till Paginator
+                    $pages->set_total($stmt->rowCount());
+                    $stmt = $db->query('SELECT postID, postTitle, postSlug, postDesc, postDate, postUser FROM posts ORDER BY postID DESC '.$pages->get_limit());
+                    while ($row = $stmt->fetch()) {
                         echo '<article class="blog-item">';
 
-                            echo '<header>';
+                        echo '<header>';
 
-                            echo '<h2 class="titel"><a href="'.$row['postSlug'].'">'.$row['postTitle'].'</a></h2>';
+                        echo '<h2 class="titel"><a href="'.$row['postSlug'].'">'.$row['postTitle'].'</a></h2>';
 
-                            echo '<ul class="meta list-inline">';
+                        echo '<ul class="meta list-inline">';
 
-                                echo '<li class="list-inline-item>'.date('j F Y', strtotime($row['postDate'])).'</li>';
-                                echo '<li class="list-inline-item>'.$row['postUser'].'</li>';
+                        echo '<li class="list-inline-item">'.date('j F Y', strtotime($row['postDate'])).'</li>';
+                        echo '<li class="list-inline-item">'.$row['postUser'].'</li>';
 
-                            echo '</ul>';
+                        echo '</ul>';
 
-                            echo '</header>';
+                        echo '</header>';
 
-                            echo '<footer>';
+                        echo '<footer>';
 
-                                echo '<p class="excerpt">'.$row['postDesc'].'</p>';
+                        echo '<p class="excerpt">'.$row['postDesc'].'</p>';
 
-                                echo '<a href="'.$row['postSlug'].'" class="btn btn-default">Läs Mer</a>';
+                        echo '<a href="'.$row['postSlug'].'" class="btn btn-default">Läs Mer</a>';
 
-                            echo '</footer>';
+                        echo '</footer>';
 
                         echo '</article>';
-					}
-					echo $pages->page_links();
-				} catch(PDOException $e) {
-				    echo $e->getMessage();
-				}
-			?>
-
-            <!-- Blogg artikel -->
-            <!-- <article class="blog-item"> -->
-                <!-- Header -->
-                <!-- <header> -->
-                    <!-- Titel -->
-                    <!-- <h2 class="title"><a href="blogg/internetshistoria.html">Internets Historia</a></h2> -->
-                    <!-- Meta -->
-                    <!-- <ul class="meta list-inline"> -->
-                        <!-- <li class="list-inline-item">6 Februari 2019</li> -->
-                        <!-- <li class="list-inline-item">Tobias</li> -->
-                    <!-- </ul> -->
-                <!-- </header> -->
-                <!-- Bild -->
-                <!-- <img src="resources/images/blogg/internetshistoria/cover.jpg" alt="Blogg"> -->
-                <!-- Footer -->
-                <!-- <footer> -->
-                    <!-- Utdrag -->
-                    <!-- <p class="excerpt">Webbutveckling har som tjänst utvecklats enormt de senaste åren. Vilket har skapat en mängd nya jobb och möjligheter.</p> -->
-                    <!-- Läs Mer knapp -->
-                    <!-- <a href="blogg/internetshistoria.html" class="btn btn-default">Läs Mer</a> -->
-                <!-- </footer> -->
-            <!-- </article> -->
-
-            <nav class="pagination-outer">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
-                </ul>
-            </nav>
+                    }
+                    echo $pages->page_links();
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
+            ?>
 
         </div>
 

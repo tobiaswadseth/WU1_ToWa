@@ -1,11 +1,11 @@
-<?php require('assets/blogg/config.php'); 
+<?php require('assets/blogg/config.php');
 $stmt = $db->prepare('SELECT postID, postTitle, postCont, postDate, postUser FROM posts WHERE postSlug = :postSlug');
 $stmt->execute(array(':postSlug' => $_GET['id']));
 $row = $stmt->fetch();
 // Finns inte ID omdirigera tillbaka till blogg.php.
-if($row['postID'] == ''){
-	header('Location: ./blogg.php');
-	exit;
+if ($row['postID'] == '') {
+    header('Location: ./blogg.php');
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -73,7 +73,14 @@ if($row['postID'] == ''){
             <li><a href="om.html">Om</a></li>
             <li><a href="blogg.php">Blogg</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
-            <li><a href="admin/login.php">Logga In</a></li>
+            <?php
+            if ($user->is_logged_in()) {
+                echo '<li><a href="admin/logout.php">Logga Ut</a></li>';
+                echo '<li><a href="admin/index.php">Kontroll Panel</a></li>';
+            } else {
+                echo '<li><a href="admin/login.php">Logga In</a></li>';
+            }
+            ?>
         </ul>
 
         <!-- Copyright -->
@@ -108,7 +115,7 @@ if($row['postID'] == ''){
 
             <div class="container container-padding">
 
-                <?php	
+                <?php
                     echo '<article class="blog-item is-single">';
                     
                         echo '<header>';
@@ -117,53 +124,17 @@ if($row['postID'] == ''){
 
                             echo '<ul class="meta list-inline">';
 
-                                echo '<li class="list-inline-item>'.date('j F Y', strtotime($row['postDate'])).'</li>';
-                                echo '<li class="list-inline-item>'.$row['postUser'].'</li>';
+                                echo '<li class="list-inline-item">'.date('j F Y', strtotime($row['postDate'])).'</li>';
+                                echo '<li class="list-inline-item">'.$row['postUser'].'</li>';
 
                             echo '</ul>';
 
                         echo '</header>';
 
-                        echo '<div class="content">'.$row['postCont'].'</div>';	
+                        echo '<div class="content">'.$row['postCont'].'</div>';
 
                     echo '</article>';
                 ?>
-
-                <!-- Blogg artikel -->
-                <!-- <article class="blog-item is-single"> -->
-                    <!-- Header -->
-                    <!-- <header> -->
-                        <!-- Titel -->
-                        <!-- <h2 class="title">Internets Historia</h2> -->
-                        <!-- Meta -->
-                        <!-- <ul class="meta list-inline"> -->
-                            <!-- Datum -->
-                            <!-- <li class="list-inline-item">6 Februari 2019</li> -->
-                            <!-- Användare -->
-                            <!-- <li class="list-inline-item">Tobias</li> -->
-                        <!-- </ul> -->
-                    <!-- </header> -->
-                    <!-- Bild -->
-                    <!-- <img src="../resources/images/blogg/internetshistoria/blog-1.jpg" alt="Blogg">
-                    <div class="content">
-                        <p>Webbutveckling har som tjänst utvecklats enormt de senaste åren. Vilket har skapat en mängd nya jobb och möjligheter. Eftersom fler och fler företag och individer väljer att lägga mer och mer tid på internet. Företag väljer att använda sig av internet för att presentera portfolio eller tjänster även produkter. I form av webbsidor. Som till exempel denna hemsida.</p>
-                        <h5>Webbutveckling</h5>
-                        <p>Varför just webbutveckling? Eftersom kursen är webbutveckling tänkte jag att det vore aktuellt att skriva om just detta ämne. Webbutveckling är en samlingsterm för det tekniska kring webbsidor. Detta inkluderar både front-end och back-end.</p>
-                        <h6>Front-End</h6>
-                        <ul><li>Front-End är tekniken som framställer den "synliga" delen av webbsidan, e.g. HTML, CSS och Javascript.</li></ul>
-                        <h6>Back-End</h6>
-                        <ul><li>Back-End är tekniken som framställer den "osynliga" delen av webbsidan, e.g. inloggningssystem och kontaktformulär.</li></ul>
-                        <h6>Påverkan</h6>
-                        <p>Webbutveckling har påverkat internet genom att fler språk/markups blir accepterade som standard vilket tillåter säkerheten att bli bättre för webbsidor och andra projekt som är webb baserade. Samt att det konstant utvecklas bättre metoder för i stort sätt samma saker för att det skall bli mer effektivt och sparsamt. Som till exempel i boken Webbutveckling med PHP och MySQL av Montathar Faraon beskriver de primärt HTMLs uppbyggnad och hur PHP och MySQL integreras med HTML.</p>
-                        <p>Webbutvecklingens utvecklande och utsträckning har tillfört flera arbetspositioner, som till stor del är baserade på de listade ovan. Men dessa jobb hade försvunnit med webbutvecklingen om webbutvecklingen hade försvunnit imorgon, det hade också orsakat att flera tusentals personer förlorar sina jobb också. Även stora företag så som Google kommer också att försvinna eftersom att de är uppbyggda på internet och det kommer inte att finnas några som kan sköta om deras webbsidor och tjänster.</p>
-                        <p>Om webbutveckling hade försvunnit hade så hade stor del blivit övertagen av andra programmerings språk såsom Java, Javascript, C++, osv. Tekniken hade också troligtvis behövts återinföras efter någon tid på grund av om man tittar på hur mycket som är webb baserat idag. Hade det återinförts hade jag själv ansett ett bättre och mer effektivt CSS "språk" skulle anges som standard.</p>
-                        <h6>Funktionalitet</h6>
-                        <p>Som beskrivet ovan är webbutveckling tekniken bakom webbsidor och skrivs främst i HTML, CSS och Javascript. Det finns även andra språk att skriva i men det görs genom så kallade preprocessors som omvandlar det skriva till HTML, CSS eller Javascript beroende på vad det berör. De olika standarder som används idag uppdateras väldigt ofta för effektiviseringens skull. Webbutveckling är främst baserad på dessa tre delar. CSS står för <u>C</u>ascading <u>S</u>tyle <u>S</u>heet och är ett style sheet språk och används för att ändra utseendet på de olika elementen som kan visas på en webbsida. Javascript är ett skript språk som används för att underlätta livet för en webbutvecklare så personen kan skapa interaktiva och dynamiska webbsidor. HTML står för <u>H</u>yper <u>T</u>ext <u>M</u>arkup <u>L</u>anguage är ett markup språk som används för att skapa grunden och de olika elementen som skall visas på webbsidan genom användarens webbläsare.</p>
-                        <h6>Bibliografi</h6>
-                        <p>Faraon, M. (2017). Webbutveckling med PHP och MySQL. 2nd ed. Lund: Studentlitteratur.</p>
-                        <p>Jag valde denna bok därför att den är väldigt ny det vill säga att den innehåller relevant information om ämnet samt författaren (Montathar Faraon) är en trovärdig person. Faraon är lärare på Högskolan Kristianstad, HKR. Därför känner jag att det är en trovärdig källa av relevant information.</p>
-                    </div>
-                </article> -->
 
             </div>
 

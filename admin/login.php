@@ -2,7 +2,9 @@
 //include config
 require_once('../assets/blogg/config.php');
 //check if already logged in
-if( $user->is_logged_in() ){ header('Location: index.php'); } 
+if ($user->is_logged_in()) {
+    header('Location: index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -70,7 +72,14 @@ if( $user->is_logged_in() ){ header('Location: index.php'); }
             <li><a href="../om.html">Om</a></li>
             <li><a href="../blogg.php">Blogg</a></li>
             <li><a href="../kontakt.html">Kontakt</a></li>
-            <li><a href="login.php">Logga In</a></li>
+            <?php
+            if ($user->is_logged_in()) {
+                echo '<li><a href="admin/logout.php">Logga Ut</a></li>';
+                echo '<li><a href="admin/index.php">Kontroll Panel</a></li>';
+            } else {
+                echo '<li><a href="admin/login.php">Logga In</a></li>';
+            }
+            ?>
         </ul>
 
         <!-- Copyright -->
@@ -98,29 +107,34 @@ if( $user->is_logged_in() ){ header('Location: index.php'); }
             </nav>
         </header>
 
-        <?php
-        //process login form if submitted
-        if(isset($_POST['submit'])){
-            $username = trim($_POST['username']);
-            $password = trim($_POST['password']);
-            
-            if($user->login($username,$password)){ 
-                //logged in return to index page
-                header('Location: index.php');
-                exit;
-            
-            } else {
-                $message = '<p class="error">Wrong username or password</p>';
-            }
-        }//end if submit
-        if(isset($message)){ echo $message; }
-        ?>
+        <div class="container container-padding">
+            <form id="login-form" class="login-form mt-6" method="post" autocomplete="off" action="../assets/form/login.php">
+                <!-- <p><label>Username</label><input type="text" name="username" value=""  /></p>
+                <p><label>Password</label><input type="password" name="password" value=""  /></p>
+                <p><label></label><input type="submit" name="submit" value="Login"  /></p> -->
 
-        <form action="" method="post">
-            <p><label>Username</label><input type="text" name="username" value=""  /></p>
-            <p><label>Password</label><input type="password" name="password" value=""  /></p>
-            <p><label></label><input type="submit" name="submit" value="Login"  /></p>
-        </form>
+                <div class="messages"></div>
+
+                <div class="row">
+                    <div class="column col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="InputUsername" id="InputUsername" placeholder="Användarnamn" required="required" data-error="Användarnamn krävs.">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+
+                    <div class="column col-md-6">
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="InputPassword" id="InputPassword" placeholder="Lösenord" required="required" data-error="Lösenord krävs.">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" name="submit" id="submit" value="Submit" class="btn btn-default btn-lg btn-full">Logga In</button>
+
+            </form>
+        </div>
     </div>
 
     <!-- Go to top -->
@@ -134,6 +148,8 @@ if( $user->is_logged_in() ){ header('Location: index.php'); }
     <script src="../assets/js/imagesloaded.pkgd.min.js"></script>
     <script src="../assets/js/jquery.stellar.js"></script>
     <script src="../assets/js/infinite-scroll.min.js"></script>
+    <script src="../assets/js/login.js"></script>
+    <script src="../assets/js/validator.js"></script>
     <script src="../assets/js/custom.js"></script>
 
 </body>

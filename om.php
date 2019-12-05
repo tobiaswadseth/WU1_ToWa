@@ -64,7 +64,14 @@
             <li><a href="om.html">Om</a></li>
             <li><a href="blogg.php">Blogg</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
-            <li><a href="admin/login.php">Logga In</a></li>
+            <?php
+            if ($user->is_logged_in()) {
+                echo '<li><a href="admin/logout.php">Logga Ut</a></li>';
+                echo '<li><a href="admin/index.php">Kontroll Panel</a></li>';
+            } else {
+                echo '<li><a href="admin/login.php">Logga In</a></li>';
+            }
+            ?>
         </ul>
 
         <!-- Copyright -->

@@ -69,7 +69,14 @@ require_once('../assets/blogg/config.php');
             <li><a href="../om.html">Om</a></li>
             <li><a href="../blogg.php">Blogg</a></li>
             <li><a href="../kontakt.html">Kontakt</a></li>
-            <li><a href="login.php">Logga In</a></li>
+            <?php
+            if ($user->is_logged_in()) {
+                echo '<li><a href="admin/logout.php">Logga Ut</a></li>';
+                echo '<li><a href="admin/index.php">Kontroll Panel</a></li>';
+            } else {
+                echo '<li><a href="admin/login.php">Logga In</a></li>';
+            }
+            ?>
         </ul>
 
         <!-- Copyright -->
@@ -99,23 +106,23 @@ require_once('../assets/blogg/config.php');
         
         <?php
         //if form has been submitted process it
-        if(isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
             //collect form data
             extract($_POST);
             //very basic validation
-            if($username ==''){
+            if ($username =='') {
                 $error[] = 'Please enter the username.';
             }
-            if($password ==''){
+            if ($password =='') {
                 $error[] = 'Please enter the password.';
             }
-            if($passwordConfirm ==''){
+            if ($passwordConfirm =='') {
                 $error[] = 'Please confirm the password.';
             }
-            if($password != $passwordConfirm){
+            if ($password != $passwordConfirm) {
                 $error[] = 'Passwords do not match.';
             }
-            if(!isset($error)){
+            if (!isset($error)) {
                 $hashedpassword = $user->password_hash($_POST['password'], PASSWORD_BCRYPT);
                 try {
                     //insert into database
@@ -127,14 +134,14 @@ require_once('../assets/blogg/config.php');
                     //redirect to index page
                     header('Location: users.php?action=added');
                     exit;
-                } catch(PDOException $e) {
+                } catch (PDOException $e) {
                     echo $e->getMessage();
                 }
             }
         }
         //check for any errors
-        if(isset($error)){
-            foreach($error as $error){
+        if (isset($error)) {
+            foreach ($error as $error) {
                 echo '<p class="error">'.$error.'</p>';
             }
         }
@@ -143,13 +150,19 @@ require_once('../assets/blogg/config.php');
         <form action='' method='post'>
 
             <p><label>Username</label><br />
-            <input type='text' name='username' value='<?php if(isset($error)){ echo $_POST['username'];}?>'></p>
+            <input type='text' name='username' value='<?php if (isset($error)) {
+            echo $_POST['username'];
+        }?>'></p>
 
             <p><label>Password</label><br />
-            <input type='password' name='password' value='<?php if(isset($error)){ echo $_POST['password'];}?>'></p>
+            <input type='password' name='password' value='<?php if (isset($error)) {
+            echo $_POST['password'];
+        }?>'></p>
 
             <p><label>Confirm Password</label><br />
-            <input type='password' name='passwordConfirm' value='<?php if(isset($error)){ echo $_POST['passwordConfirm'];}?>'></p>
+            <input type='password' name='passwordConfirm' value='<?php if (isset($error)) {
+            echo $_POST['passwordConfirm'];
+        }?>'></p>
             
             <p><input type='submit' name='submit' value='Add User'></p>
 

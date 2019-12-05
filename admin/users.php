@@ -2,17 +2,19 @@
 //include config
 require_once('../assets/blogg/config.php');
 //if not logged in redirect to login page
-if(!$user->is_logged_in()){ header('Location: login.php'); }
+if (!$user->is_logged_in()) {
+    header('Location: login.php');
+}
 //show message from add / edit page
-if(isset($_GET['deluser'])){ 
-	//if user id is 1 ignore
-	if($_GET['deluser'] !='1'){
-		$stmt = $db->prepare('DELETE FROM users WHERE memberID = :memberID') ;
-		$stmt->execute(array(':memberID' => $_GET['deluser']));
-		header('Location: users.php?action=deleted');
-		exit;
-	}
-} 
+if (isset($_GET['deluser'])) {
+    //if user id is 1 ignore
+    if ($_GET['deluser'] !='1') {
+        $stmt = $db->prepare('DELETE FROM users WHERE memberID = :memberID') ;
+        $stmt->execute(array(':memberID' => $_GET['deluser']));
+        header('Location: users.php?action=deleted');
+        exit;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -87,7 +89,14 @@ if(isset($_GET['deluser'])){
             <li><a href="../om.html">Om</a></li>
             <li><a href="../blogg.php">Blogg</a></li>
             <li><a href="../kontakt.html">Kontakt</a></li>
-            <li><a href="login.php">Logga In</a></li>
+            <?php
+            if ($user->is_logged_in()) {
+                echo '<li><a href="admin/logout.php">Logga Ut</a></li>';
+                echo '<li><a href="admin/index.php">Kontroll Panel</a></li>';
+            } else {
+                echo '<li><a href="admin/login.php">Logga In</a></li>';
+            }
+            ?>
         </ul>
 
         <!-- Copyright -->
@@ -115,11 +124,11 @@ if(isset($_GET['deluser'])){
             </nav>
         </header>
 
-        <?php 
+        <?php
         //show message from add / edit page
-        if(isset($_GET['action'])){ 
-            echo '<h3>User '.$_GET['action'].'.</h3>'; 
-        } 
+        if (isset($_GET['action'])) {
+            echo '<h3>User '.$_GET['action'].'.</h3>';
+        }
         ?>
 
         <table>
@@ -131,23 +140,21 @@ if(isset($_GET['deluser'])){
         <?php
             try {
                 $stmt = $db->query('SELECT memberID, username FROM users ORDER BY username');
-                while($row = $stmt->fetch()){
-                    
+                while ($row = $stmt->fetch()) {
                     echo '<tr>';
-                    echo '<td>'.$row['username'].'</td>';
-                    ?>
+                    echo '<td>'.$row['username'].'</td>'; ?>
 
                     <td>
-                        <a href="edit-user.php?id=<?php echo $row['memberID'];?>">Edit</a> 
-                        <?php if($row['memberID'] != 1){?>
+                        <a href="edit-user.php?id=<?php echo $row['memberID']; ?>">Edit</a> 
+                        <?php if ($row['memberID'] != 1) {?>
                             | <a href="javascript:deluser('<?php echo $row['memberID'];?>','<?php echo $row['username'];?>')">Delete</a>
                         <?php } ?>
                     </td>
                     
-                    <?php 
+                    <?php
                     echo '</tr>';
                 }
-            } catch(PDOException $e) {
+            } catch (PDOException $e) {
                 echo $e->getMessage();
             }
         ?>

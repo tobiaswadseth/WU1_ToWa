@@ -1,7 +1,9 @@
 <?php //include config
 require_once('../assets/blogg/config.php');
 //if not logged in redirect to login page
-if(!$user->is_logged_in()){ header('Location: login.php'); }
+if (!$user->is_logged_in()) {
+    header('Location: login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -82,7 +84,14 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
             <li><a href="../om.html">Om</a></li>
             <li><a href="../blogg.php">Blogg</a></li>
             <li><a href="../kontakt.html">Kontakt</a></li>
-            <li><a href="login.php">Logga In</a></li>
+            <?php
+            if ($user->is_logged_in()) {
+                echo '<li><a href="admin/logout.php">Logga Ut</a></li>';
+                echo '<li><a href="admin/index.php">Kontroll Panel</a></li>';
+            } else {
+                echo '<li><a href="admin/login.php">Logga In</a></li>';
+            }
+            ?>
         </ul>
 
         <!-- Copyright -->
@@ -112,20 +121,20 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 
         <?php
         //if form has been submitted process it
-        if(isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
             //collect form data
             extract($_POST);
             //very basic validation
-            if($postTitle ==''){
+            if ($postTitle =='') {
                 $error[] = 'Please enter the title.';
             }
-            if($postDesc ==''){
+            if ($postDesc =='') {
                 $error[] = 'Please enter the description.';
             }
-            if($postCont ==''){
+            if ($postCont =='') {
                 $error[] = 'Please enter the content.';
             }
-            if(!isset($error)){
+            if (!isset($error)) {
                 try {
                     $postSlug = slug($postTitle);
                     //insert into database
@@ -142,14 +151,14 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
                     //redirect to index page
                     header('Location: index.php?action=added');
                     exit;
-                } catch(PDOException $e) {
+                } catch (PDOException $e) {
                     echo $e->getMessage();
                 }
             }
         }
         //check for any errors
-        if(isset($error)){
-            foreach($error as $error){
+        if (isset($error)) {
+            foreach ($error as $error) {
                 echo '<p class="error">'.$error.'</p>';
             }
         }
@@ -158,13 +167,19 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
         <form action='' method='post'>
 
             <p><label>Title</label><br />
-            <input type='text' name='postTitle' value='<?php if(isset($error)){ echo $_POST['postTitle'];}?>'></p>
+            <input type='text' name='postTitle' value='<?php if (isset($error)) {
+            echo $_POST['postTitle'];
+        }?>'></p>
 
             <p><label>Description</label><br />
-            <textarea name='postDesc' cols='60' rows='10'><?php if(isset($error)){ echo $_POST['postDesc'];}?></textarea></p>
+            <textarea name='postDesc' cols='60' rows='10'><?php if (isset($error)) {
+            echo $_POST['postDesc'];
+        }?></textarea></p>
 
             <p><label>Content</label><br />
-            <textarea name='postCont' cols='60' rows='10'><?php if(isset($error)){ echo $_POST['postCont'];}?></textarea></p>
+            <textarea name='postCont' cols='60' rows='10'><?php if (isset($error)) {
+            echo $_POST['postCont'];
+        }?></textarea></p>
 
             <p><input type='submit' name='submit' value='Submit'></p>
 

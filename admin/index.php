@@ -3,14 +3,16 @@
 //include config
 require_once('../assets/blogg/config.php');
 //if not logged in redirect to login page
-if(!$user->is_logged_in()){ header('Location: login.php'); }
+if (!$user->is_logged_in()) {
+    header('Location: login.php');
+}
 //show message from add / edit page
-if(isset($_GET['delpost'])){ 
-	$stmt = $db->prepare('DELETE FROM posts WHERE postID = :postID') ;
-	$stmt->execute(array(':postID' => $_GET['delpost']));
-	header('Location: index.php?action=deleted');
-	exit;
-} 
+if (isset($_GET['delpost'])) {
+    $stmt = $db->prepare('DELETE FROM posts WHERE postID = :postID') ;
+    $stmt->execute(array(':postID' => $_GET['delpost']));
+    header('Location: index.php?action=deleted');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -85,7 +87,14 @@ if(isset($_GET['delpost'])){
             <li><a href="../om.html">Om</a></li>
             <li><a href="../blogg.php">Blogg</a></li>
             <li><a href="../kontakt.html">Kontakt</a></li>
-            <li><a href="login.php">Logga In</a></li>
+            <?php
+            if ($user->is_logged_in()) {
+                echo '<li><a href="admin/logout.php">Logga Ut</a></li>';
+                echo '<li><a href="admin/index.php">Kontroll Panel</a></li>';
+            } else {
+                echo '<li><a href="admin/login.php">Logga In</a></li>';
+            }
+            ?>
         </ul>
 
         <!-- Copyright -->
@@ -113,11 +122,11 @@ if(isset($_GET['delpost'])){
             </nav>
         </header>
 
-        <?php 
+        <?php
         //show message from add / edit page
-        if(isset($_GET['action'])){ 
-            echo '<h3>Post '.$_GET['action'].'.</h3>'; 
-        } 
+        if (isset($_GET['action'])) {
+            echo '<h3>Post '.$_GET['action'].'.</h3>';
+        }
         ?>
 
         <table>
@@ -130,23 +139,21 @@ if(isset($_GET['delpost'])){
         <?php
             try {
                 $stmt = $db->query('SELECT postID, postTitle, postDate, postUser FROM posts ORDER BY postID DESC');
-                while($row = $stmt->fetch()){
-                    
+                while ($row = $stmt->fetch()) {
                     echo '<tr>';
                     echo '<td>'.$row['postTitle'].'</td>';
                     echo '<td>'.date('jS M Y', strtotime($row['postDate'])).'</td>';
-                    echo '<td>'.$row['postUser'].'</td>';
-                    ?>
+                    echo '<td>'.$row['postUser'].'</td>'; ?>
 
                     <td>
-                        <a href="edit-post.php?id=<?php echo $row['postID'];?>">Edit</a> | 
-                        <a href="javascript:delpost('<?php echo $row['postID'];?>','<?php echo $row['postTitle'];?>')">Delete</a>
+                        <a href="edit-post.php?id=<?php echo $row['postID']; ?>">Edit</a> | 
+                        <a href="javascript:delpost('<?php echo $row['postID']; ?>','<?php echo $row['postTitle']; ?>')">Delete</a>
                     </td>
                     
-                    <?php 
+                    <?php
                     echo '</tr>';
                 }
-            } catch(PDOException $e) {
+            } catch (PDOException $e) {
                 echo $e->getMessage();
             }
         ?>
