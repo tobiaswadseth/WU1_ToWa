@@ -17,7 +17,7 @@ try {
         throw new \Exception('Form is empty');
     }
 
-    $emailText = "Du har fått ett nytt meddelande från ditt kontaktformulär från wadseth.com!\n\n";
+    $emailText = "Du har fått ett nytt meddelande från ditt kontaktformulär!\n\n";
 
     foreach ($_POST as $key => $value) {
         if (isset($fields[$key])) {
