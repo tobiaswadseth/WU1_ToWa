@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css" media="all">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/css/all.min.css" type="text/css" media="all">
-    <!-- Ikoner -->
+    <!-- IonIcons -->
     <link rel="stylesheet" href="assets/css/ionicons.min.css" type="text/css" media="all">
     <!-- Egen -->
     <link rel="stylesheet" href="assets/css/style.min.css" type="text/css" media="all">
@@ -62,12 +62,16 @@
                 </ul>
             </li>
             <li><a href="om.html">Om</a></li>
-            <li><a href="blogg.html">Blogg</a>
-                <ul class="submenu">
-                    <li><a href="blogg/internetshistoria.html">Internets Historia</a></li>
-                </ul>
-            </li>
+            <li><a href="blogg.php">Blogg</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
+            <?php
+            if ($user->is_logged_in()) {
+                echo '<li><a href="admin/logout.php">Logga Ut</a></li>';
+                echo '<li><a href="admin/index.php">Kontroll Panel</a></li>';
+            } else {
+                echo '<li><a href="admin/login.php">Logga In</a></li>';
+            }
+            ?>
         </ul>
 
         <!-- Copyright -->
@@ -101,54 +105,37 @@
         <section class="content">
             <div class="container container-padding">
 
-                <div class="page-header">
-                    <h1>Vad undrar du om?</h1>
-                    <p>Fråga mig så återkommer jag så snart jag kan.</p>
+                <div class="page-header text-center">
+                    <h1>Tobias Wadseth</h1>
+                    <p>Webbutveckling 1 Portfolio</p>
                 </div>
 
             </div>
 
-            <div class="parallax-bg" data-image-src="resources/images/eriksberg.png" data-stellar-background-ratio="0.5"></div>
+            <div class="parallax-bg" data-image-src="resources/images/headshot.png" data-stellar-background-ratio="0.5"></div>
 
             <div class="container container-padding">
+                <h2 class="mt-10 mb-4">Om Mig</h2>
+                <p>Jag är 19 år, bosatt i Göteborg och går i trean på Thoren Innovation School. Jag har alltid varit intresserad utav webben och vad den består av. Jag började kolla på hur olika hemsidor är uppbyggda genom att kolla i developer tools (inspektera element). Sedan började jag smått skriva egen kod i HTML och insåg snart att man kunde ändra utseendet med CSS. Snart därefter såg jag att Javascript kunde integreras med HTML och även CSS. Jag håller tillmestadels på med Front-End men är även lite intresserad av hur inloggningssystem och kontaktformulär fungerar så jag har börjat läsa på om PHP.</p>
 
-                <!-- Kontakt formulär -->
-                <form id="contact-form" class="contact-form mt-6" method="post" action="form/contact.php">
-
-                    <div class="messages"></div>
-
-                    <div class="row">
-                        <div class="column col-md-6">
-                            <!-- Namn -->
-                            <div class="form-group">
-                                <input autocomplete="off" type="text" class="form-control" name="InputName" id="InputName" placeholder="Ditt namn" required="required" data-error="Namn krävs.">
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-
-                        <div class="column col-md-6">
-                            <!-- Email -->
-                            <div class="form-group">
-                                <input autocomplete="off" type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="Email adress" required="required" data-error="Email krävs.">
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-
-                        <div class="column col-md-12">
-                            <!-- Meddelande -->
-                            <div class="form-group">
-                                <textarea autocomplete="off" name="InputMessage" id="InputMessage" class="form-control" rows="5" placeholder="Meddelande" required="required" data-error="Meddelande krävs."></textarea>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Skicka knapp -->
-                    <button type="submit" name="submit" id="submit" value="Submit" class="btn btn-default btn-lg btn-full">Skicka</button>
-
-                </form>
+                <h3 class="mt-10 mb-4">Mina Färdigheter</h3>
+                <ul>
+                    <li>3+ år av Webbutveckling</li>
+                    <li>5+ år av Java</li>
+                    <li>4+ år av Javascript</li>
+                    <li>2+ år av JQuery</li>
+                    <li>1+ år av PHP</li>
+                </ul>
             </div>
 
+        </section>
+
+        <!-- Email -->
+        <section class="cta text-center">
+            <div class="container">
+                <span>Kontakta Mig</span>
+                <h2><a href="contact">tobias@wadseth.com</a></h2>
+            </div>
         </section>
 
         <!-- Sid footer -->
@@ -159,7 +146,6 @@
             </div>
         </footer>
 
-    </div>
 
     <!-- Go to top -->
     <a href="javascript:" id="return-to-top"><i class="ion-md-arrow-up"></i></a>
@@ -172,8 +158,6 @@
     <script src="assets/js/imagesloaded.pkgd.min.js"></script>
     <script src="assets/js/jquery.stellar.js"></script>
     <script src="assets/js/infinite-scroll.min.js"></script>
-    <script src="assets/js/contact.js"></script>
-    <script src="assets/js/validator.js"></script>
     <script src="assets/js/custom.js"></script>
 
 </body>

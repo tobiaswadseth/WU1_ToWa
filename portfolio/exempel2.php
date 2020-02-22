@@ -26,7 +26,7 @@
 
 <body>
 
-    <!-- Custom Cursor -->
+    <!-- Custom cursor -->
     <div id="cursor"></div>
 
     <!-- Preloader -->
@@ -62,12 +62,9 @@
                 </ul>
             </li>
             <li><a href="../om.html">Om</a></li>
-            <li><a href="../blogg.html">Blogg</a>
-                <ul class="submenu">
-                    <li><a href="../blogg/internetshistoria.html">Internets Historia</a></li>
-                </ul>
-            </li>
+            <li><a href="../blogg.php">Blogg</a></li>
             <li><a href="../kontakt.html">Kontakt</a></li>
+            <li><a href="../admin/login.php">Logga In</a></li>
         </ul>
 
         <!-- Copyright -->
@@ -145,7 +142,7 @@
                 </div>
             </div>
 
-            <div class="parallax-bg" data-image-src="../resources/images/portfolio/example1/portfolio-1.jpg" data-stellar-background-ratio="0.5"></div>
+            <div class="parallax-bg" data-image-src="../resources/images/portfolio/example2/portfolio-1.jpg" data-stellar-background-ratio="0.5"></div>
 
             <div class="container container-padding mt-15 mb-15">
                 <h2 class="mt0 mb-4">Lorem.<br />Ipsum Dolor Sit Amet.</h2>
@@ -153,7 +150,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat libero, eaque quisquam hic!</p>
             </div>
 
-            <div class="parallax-bg" data-image-src="../resources/images/portfolio/example1/portfolio-2.jpg" data-stellar-background-ratio="0.5"></div>
+            <div class="parallax-bg" data-image-src="../resources/images/portfolio/example2/portfolio-2.jpg" data-stellar-background-ratio="0.5"></div>
 
             <div class="container container-padding mt-15">
                 <h2 class="mt-0 mb-4">Lorem.<br />Ipsum Dolor Sit Amet.</h2>
@@ -163,7 +160,8 @@
 
             <div class="container clearfix">
                 <div class="navigation">
-                    <a href="exempel2.html" class="next float-right">Nästa Projekt<i class="ion-md-arrow-forward"></i></a>
+                    <a href="exempel1.html" class="prev float-left"><i class="ion-md-arrow-back"></i>Tidigare Projekt</a>
+                    <a href="exempel3.html" class="next float-right">Nästa Projekt<i class="ion-md-arrow-forward"></i></a>
                 </div>
             </div>
 

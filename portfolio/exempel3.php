@@ -62,12 +62,9 @@
                 </ul>
             </li>
             <li><a href="../om.html">Om</a></li>
-            <li><a href="../blogg.html">Blogg</a>
-                <ul class="submenu">
-                    <li><a href="../blogg/internetshistoria.html">Internets Historia</a></li>
-                </ul>
-            </li>
+            <li><a href="../blogg.php">Blogg</a></li>
             <li><a href="../kontakt.html">Kontakt</a></li>
+            <li><a href="../admin/login.php">Logga In</a></li>
         </ul>
 
         <!-- Copyright -->

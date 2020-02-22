@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /WU1_ToWa/
+
+RewriteCond %{REQUEST_FILENAME} !-d [NC]
+RewriteCond %{REQUEST_FILENAME} !-f [NC]
+RewriteRule ^(.*)$ post.php?id=$1 [QSA,L]

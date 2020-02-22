@@ -1,3 +1,13 @@
+<?php require('assets/blogg/config.php');
+$stmt = $db->prepare('SELECT postID, postTitle, postCont, postDate, postUser FROM posts WHERE postSlug = :postSlug');
+$stmt->execute(array(':postSlug' => $_GET['id']));
+$row = $stmt->fetch();
+// Finns inte ID omdirigera tillbaka till blogg.php.
+if ($row['postID'] == '') {
+    header('Location: ./blogg.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="sv">
 
@@ -18,14 +28,13 @@
     <link rel="stylesheet" href="assets/css/style.min.css" type="text/css" media="all">
 
     <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 </head>
 
 <body>
-
     <!-- Custom cursor -->
     <div id="cursor"></div>
 
@@ -62,12 +71,16 @@
                 </ul>
             </li>
             <li><a href="om.html">Om</a></li>
-            <li><a href="blogg.html">Blogg</a>
-                <ul class="submenu">
-                    <li><a href="blogg/internetshistoria.html">Internets Historia</a></li>
-                </ul>
-            </li>
+            <li><a href="blogg.php">Blogg</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
+            <?php
+            if ($user->is_logged_in()) {
+                echo '<li><a href="admin/logout.php">Logga Ut</a></li>';
+                echo '<li><a href="admin/index.php">Kontroll Panel</a></li>';
+            } else {
+                echo '<li><a href="admin/login.php">Logga In</a></li>';
+            }
+            ?>
         </ul>
 
         <!-- Copyright -->
@@ -98,30 +111,31 @@
         </header>
 
         <!-- Innehåll -->
-        <section class="content">
-            <div class="container container-padding">
-
-                <div class="page-header text-center">
-                    <h1>Tobias Wadseth</h1>
-                    <p>Webbutveckling 1 Portfolio</p>
-                </div>
-
-            </div>
-
-            <div class="parallax-bg" data-image-src="resources/images/headshot.png" data-stellar-background-ratio="0.5"></div>
+        <section class="blog-content">
 
             <div class="container container-padding">
-                <h2 class="mt-10 mb-4">Om Mig</h2>
-                <p>Jag är 18 år, bosatt i göteborg och går i tvåan på Thorén Innovation School. Jag har alltid varit intresserad utav webben och vad den består av. Jag började kolla på hur olika hemsidor är uppbyggda genom att kolla i developer tools (inspektera element). Sedan började jag smått skriva egen kod i HTML och insåg snart att man kunde ändra utseendet med CSS. Snart därefter såg jag att Javascript kunde integreras med HTML och även CSS. Jag håller tillmestadels på med Front-End men är även lite intresserad av hur inloggningssystem och kontaktformulär fungerar så jag har börjat läsa på om PHP.</p>
 
-                <h3 class="mt-10 mb-4">Mina Färdigheter</h3>
-                <ul>
-                    <li>3+ år av Webbutveckling</li>
-                    <li>5+ år av Java</li>
-                    <li>4+ år av Javascript</li>
-                    <li>2+ år av JQuery</li>
-                    <li>1+ år av PHP</li>
-                </ul>
+                <?php
+                    echo '<article class="blog-item is-single">';
+                    
+                        echo '<header>';
+
+                            echo '<h2 class="title">'.$row['postTitle'].'</h1>';
+
+                            echo '<ul class="meta list-inline">';
+
+                                echo '<li class="list-inline-item">'.date('j F Y', strtotime($row['postDate'])).'</li>';
+                                echo '<li class="list-inline-item">'.$row['postUser'].'</li>';
+
+                            echo '</ul>';
+
+                        echo '</header>';
+
+                        echo '<div class="content">'.$row['postCont'].'</div>';
+
+                    echo '</article>';
+                ?>
+
             </div>
 
         </section>
@@ -130,18 +144,18 @@
         <section class="cta text-center">
             <div class="container">
                 <span>Kontakta Mig</span>
-                <h2><a href="contact">tobias@wadseth.com</a></h2>
+                <h2><a href="../kontakt.html">tobias@wadseth.com</a></h2>
             </div>
         </section>
 
         <!-- Sid footer -->
         <footer class="text-center">
             <div class="container">
-                <!-- Copyright -->
-                <span class="copyright">© <span id="year"></span> Tobias Wadseth</span>
+                <!-- copyright -->
+                <span class="copyright">&copy; <span id="year"></span> Tobias Wadseth</span>
             </div>
         </footer>
-
+	</div>
 
     <!-- Go to top -->
     <a href="javascript:" id="return-to-top"><i class="ion-md-arrow-up"></i></a>
@@ -157,5 +171,4 @@
     <script src="assets/js/custom.js"></script>
 
 </body>
-
 </html>
