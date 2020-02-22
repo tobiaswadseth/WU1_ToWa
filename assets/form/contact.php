@@ -1,8 +1,8 @@
 <?php
 
-$from = 'tobias@wadseth.com';
+$from = 'wadseth.tobias@gmail.com';
 
-$sendTo = 'tobias@wadseth.com';
+$sendTo = 'wadseth.tobias@gmail.com';
 
 $subject = 'Nytt meddelande från kontaktformulär!';
 
